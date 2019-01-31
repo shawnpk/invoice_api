@@ -15,13 +15,16 @@ module V1
     end
 
     def destroy
-      current_user&.authenticate_token = nil
-
-      if current_user.save
+      if nilify_token && current_user.save
         head :ok
       else
         head :unauthorized
       end
     end
+
+    private
+      def nilify_token
+        current_user&.authentication_token = nil
+      end
   end
 end
