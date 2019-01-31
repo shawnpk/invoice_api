@@ -1,20 +1,20 @@
 module V1
   class ContactsController < ApplicationController
     def index
-      contacts = Contact.all
+      contacts = current_user.contacts.all
 
       render json: contacts, status: :ok
     end
 
     def create
-      contact = Contact.new(contact_params)
+      contact = current_user.contacts.new(contact_params)
       contact.save!
 
       render json: contact, status: :created
     end
 
     def destroy
-      contact = Contact.find(params[:id])
+      contact = current_user.contacts.find(params[:id])
       contact.destroy!
 
       head :no_content
