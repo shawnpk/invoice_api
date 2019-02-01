@@ -1,9 +1,17 @@
 module V1
   class ContactsController < ApplicationController
+    before_action :authorize
+
     def index
       contacts = current_user.contacts.all
 
-      render json: contacts, status: :ok
+      render json: contacts, include: 'user', status: :ok 
+    end
+
+    def show
+      @contact = current_user.contacts.find(params[:id])
+      
+      render json: @contact, include: 'user', status: :ok
     end
 
     def create

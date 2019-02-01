@@ -1,14 +1,15 @@
 class UsersController < ApplicationController
+  before_action :authorize, except: %i[create]
   before_action :set_user, only: %i[show edit update destroy]
 
   def index
     users = User.all
 
-    render json: users, status: :ok
+    render json: users, include: 'contacts', status: :ok
   end
 
   def show
-    render json: @user, status: :ok
+    render json: @user, include: 'contacts', status: :ok
   end
 
   def create
