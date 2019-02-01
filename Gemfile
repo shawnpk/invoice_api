@@ -12,6 +12,7 @@ gem 'rack-cors'
 gem 'jwt'
 gem 'bcrypt'
 gem 'active_model_serializers'
+gem 'friendly_id'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
